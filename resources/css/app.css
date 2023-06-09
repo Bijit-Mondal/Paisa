@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-moz-selection {
+    color: #6f6aff;
+    background: lavender;
+}
+
+::selection {
+    color: #540062;
+    background: #e5b6ec;
+}
+@font-face {
+    font-family: 'SansAndreas';
+    src: url('../fonts/Sans_Andreas.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    font-family: 'SansAndreas';
+}
+input:focus {
+    outline: 2px solid red; /* Change the color to your desired color */
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
