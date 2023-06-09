@@ -12,9 +12,18 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Transaction') }}
-                    </x-nav-link>
+                    @if (auth()->user()->role_id == 5)
+                        <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                            {{ __('Transaction') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (auth()->user()->role_id == 4)
+                        <x-nav-link href="{{ route('adminadmin.index') }}" :active="request()->routeIs('adminadmin.index')">
+                            {{ __('Add Items') }}
+                        </x-nav-link>
+                    @endif
+
                 </div>
             </div>
 

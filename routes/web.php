@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("Home");
 
 Route::middleware([
     'auth:sanctum',
@@ -25,4 +25,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+
+Route::group(['middleware' => 'auth'],function (){
+    Route::group(['middleware' => 'Role:guest','prefix' => 'guest','as' => 'guest.'],function (){
+        Route::resource('guest',\App\Http\Controllers\Guest\ExpenseController::class);
+    });
+    Route::group(['middleware' => 'role:admin','prefix' => 'admin','as' => 'admin'],function (){
+        Route::resource('admin',\App\Http\Controllers\Admin\ItemsController::class);
+    });
 });
