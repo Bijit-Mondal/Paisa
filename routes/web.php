@@ -28,11 +28,13 @@ Route::middleware([
 });
 
 
-Route::group(['middleware' => 'auth'],function (){
-    Route::group(['middleware' => 'Role:guest','prefix' => 'guest','as' => 'guest.'],function (){
-        Route::resource('guest',\App\Http\Controllers\Guest\ExpenseController::class);
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'role:guest', 'prefix' => 'guest', 'as' => 'guest.'], function () {
+        Route::get('guest', \App\Http\Livewire\Expenses::class)->name('guest');
     });
-    Route::group(['middleware' => 'role:admin','prefix' => 'admin','as' => 'admin'],function (){
-        Route::resource('admin',\App\Http\Controllers\Admin\ItemsController::class);
+
+    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+        Route::get('item', \App\Http\Livewire\ItemGroups::class)->name('admin');
+        Route::get('add-item',\App\Http\Livewire\Items::class)->name('admin-add-item');
     });
 });

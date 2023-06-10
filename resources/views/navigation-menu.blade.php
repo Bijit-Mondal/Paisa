@@ -19,9 +19,12 @@
                     @endif
 
                     @if (auth()->user()->role_id == 4)
-                        <x-nav-link href="{{ route('adminadmin.index') }}" :active="request()->routeIs('adminadmin.index')">
-                            {{ __('Add Items') }}
+                        <x-nav-link href="{{ route('admin.admin') }}" :active="request()->routeIs('adminadmin.index')">
+                            {{ __('Add item Group') }}
                         </x-nav-link>
+                            <x-nav-link href="{{ route('admin.admin-add-item') }}" :active="request()->routeIs('adminadmin.index')">
+                                {{ __('Add items') }}
+                            </x-nav-link>
                     @endif
 
                 </div>
@@ -96,9 +99,21 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Transaction') }}
-            </x-responsive-nav-link>
+            @if (auth()->user()->role_id == 5)
+                <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{ __('Transaction') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if (auth()->user()->role_id == 4)
+                <x-responsive-nav-link href="{{ route('admin.admin') }}" :active="request()->routeIs('adminadmin.index')">
+                    {{ __('Add item Group') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('admin.admin-add-item') }}" :active="request()->routeIs('adminadmin.index')">
+                    {{ __('Add items') }}
+                </x-responsive-nav-link>
+
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
