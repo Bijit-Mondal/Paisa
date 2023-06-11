@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model{
     use HasFactory;
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'item_id');
+    }
     public function itemsGroup(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ItemsGroup::class);

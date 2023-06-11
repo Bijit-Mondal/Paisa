@@ -6,6 +6,12 @@
             @include('livewire.items-group.create')
         @endif
 
+            <x-slot name="header">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Items Group') }}
+                </h2>
+            </x-slot>
+
         <div class="lg:w-1/2 max-w-md mx-auto mt-20">
             <h2 class="text-2xl font-bold mb-4">Item Groups</h2>
             <ul class="space-y-2">

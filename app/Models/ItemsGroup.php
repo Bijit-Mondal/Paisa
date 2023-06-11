@@ -14,6 +14,11 @@ class ItemsGroup extends Model
         return $this->hasMany(Item::class);
     }
 
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'items_group_id');
+    }
+
     protected $fillable = [
         'items_group'
     ];

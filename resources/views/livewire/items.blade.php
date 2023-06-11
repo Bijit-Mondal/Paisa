@@ -1,16 +1,21 @@
 <div>
     <div class="flex flex-col lg:flex-row">
         @if($isUpdating)
-            @include('livewire.items-group.update')
+            @include('livewire.item.update',['itemsGroups' => $itemsGroups])
         @else
-            @include('livewire.item.create',['itemGroups' => $itemGroups])
+            @include('livewire.item.create',['itemsGroups' => $itemsGroups])
         @endif
 
+            <x-slot name="header">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Item') }}
+                </h2>
+            </x-slot>
 
         <div class="lg:w-1/2 max-w-md mx-auto">
             <div class="max-w-md w-full mx-4 bg-white p-8 rounded shadow-lg mt-20" x-data="{ openGroup: null }">
 
-                @foreach ($itemGroups as $itemGroup)
+                @foreach ($itemsGroups as $itemGroup)
                     <div class="border rounded">
                         <!-- item group header -->
                         <button class="w-full flex items-center justify-between p-4 focus:outline-none"
@@ -29,14 +34,19 @@
                                 <div class="py-2">
                                     {{$item->item_name}}
                                     <div class="flex items-center justify-end space-x-2 m-2">
-                                        <button class="text-gray-500 hover:text-gray-700" title="Update">
+                                        <button
+                                            wire:click="edit({{ $item->id }})"
+                                            class="text-gray-500 hover:text-gray-700" title="Update">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                       d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
                                             </svg>
                                         </button>
-                                        <button class="text-gray-500 hover:text-gray-700" title="Delete">
+                                        <button
+                                            x-data="{ confirmDelete: false }"
+                                            x-on:click="confirmDelete = confirm('Are you sure you want to delete this item?'); if (confirmDelete) { window.livewire.emit('destroy', {{ $item->id }}) }"
+                                            class="text-gray-500 hover:text-gray-700" title="Delete">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                  stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
