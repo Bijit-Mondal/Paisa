@@ -19,11 +19,14 @@
                     @endif
 
                     @if (auth()->user()->role_id == 4)
-                        <x-nav-link href="{{ route('admin.admin') }}" :active="request()->routeIs('adminadmin.index')">
+                        <x-nav-link href="{{ route('admin.admin') }}" :active="request()->routeIs('admin.admin')">
                             {{ __('Add item Group') }}
                         </x-nav-link>
-                            <x-nav-link href="{{ route('admin.admin-add-item') }}" :active="request()->routeIs('adminadmin.index')">
+                            <x-nav-link href="{{ route('admin.admin-add-item') }}" :active="request()->routeIs('admin.admin-add-item')">
                                 {{ __('Add items') }}
+                            </x-nav-link>
+                            <x-nav-link href="{{ route('admin.view-expenses') }}" :active="request()->routeIs('admin.view-expenses')">
+                                {{ __('View expenses') }}
                             </x-nav-link>
                     @endif
 
@@ -112,6 +115,9 @@
                 <x-responsive-nav-link href="{{ route('admin.admin-add-item') }}" :active="request()->routeIs('adminadmin.index')">
                     {{ __('Add items') }}
                 </x-responsive-nav-link>
+                    <x-responsive-nav-link href="{{ route('admin.view-expenses') }}" :active="request()->routeIs('admin.view-expenses')">
+                        {{ __('View expenses') }}
+                    </x-responsive-nav-link>
 
             @endif
         </div>

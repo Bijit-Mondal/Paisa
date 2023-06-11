@@ -36,5 +36,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('item', \App\Http\Livewire\ItemGroups::class)->name('admin');
         Route::get('add-item',\App\Http\Livewire\Items::class)->name('admin-add-item');
+        Route::get('view-expenses',\App\Http\Livewire\AdminExpense::class)->name('view-expenses');
     });
 });
